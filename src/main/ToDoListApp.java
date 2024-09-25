@@ -1,6 +1,7 @@
 package main;
 import ProjectАrchitecture.*;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ToDoListApp {
@@ -36,6 +37,9 @@ public class ToDoListApp {
                     taskManager.loadTasksFromFile("file.txt");
                     break;
                 case 7:
+                    searchTasks(taskManager, scanner);
+                    break;
+                case 8:
                     System.out.println("Ещё увидемся ฅ^•ﻌ•^ฅ");
                     return;
                 default:
@@ -118,7 +122,23 @@ public class ToDoListApp {
         System.out.println("4. Показать список задач");
         System.out.println("5. Сохранить задачи в файл");
         System.out.println("6. Загрузить задачи из файла");
-        System.out.println("7. Выйти");
+        System.out.println("7. Поиск задач");
+        System.out.println("8. Выйти");
+    }
+    public static void searchTasks(TaskManager taskManager, Scanner scanner){
+        System.out.println("Ключевое слово для поиска: ");
+        String word = scanner.nextLine();
+        List<Task> foundTasks = taskManager.searchTasks(word);
+
+        if (foundTasks.isEmpty()){
+            System.out.println("Задача не найдена");
+        }
+        else{
+            System.out.println("Найденный задачи:");
+            for (Task task : foundTasks){
+                System.out.println(task);
+            }
+        }
     }
 
 }

@@ -4,10 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.Scanner;
 
 
 public class TaskManager {
     private List<Task> tasks;
+    Scanner scanner = new Scanner(System.in);
 
     public TaskManager() {
         tasks = new ArrayList<>();
@@ -20,6 +22,7 @@ public class TaskManager {
     public void removeTask(int index){
         if (index >= 0 && index < tasks.size()){
             tasks.remove(index);
+            System.out.println("Задача удалена!");
         }
         else{
             System.out.println("Неверный индекс!");
@@ -33,6 +36,9 @@ public class TaskManager {
             task.setDescription(newDescription);
             task.setPriority(newPriorty);
             System.out.println("Задача обновлена!");
+        }
+        else{
+            System.out.println("Неверный индекс!");
         }
     }
 
@@ -75,4 +81,17 @@ public class TaskManager {
             System.out.println("Ошибка при загрузке задач: " + e.getMessage());
         }
     }
+    public List<Task> searchTasks(String word){
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks){
+            if (task.getDescription().toLowerCase().contains(word.toLowerCase())){
+                foundTasks.add(task);
+            }
+            else{
+                System.out.println("Задача не найдена");
+            }
+        }
+        return foundTasks;
+    }
+
 }

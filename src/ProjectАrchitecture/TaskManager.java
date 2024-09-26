@@ -93,5 +93,9 @@ public class TaskManager {
         }
         return foundTasks;
     }
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
 
 }
